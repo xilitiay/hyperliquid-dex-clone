@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard | Hyperliquid</title>
+  <meta name="description" content="Hyperliquid leaderboard — top traders ranked by PnL, ROI and volume." />
+  <meta name="color-scheme" content="dark" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
+</head>
+<body class="page-scroll">
+  <!-- Restricted-jurisdiction notice (site-wide banner on the original) -->
+  <div class="geo-banner">
+    You are accessing our products and services from a restricted jurisdiction. We do not allow access from certain jurisdictions including locations subject to sanctions restrictions and other jurisdictions where our services are not eligible for use. For more information, see our <a href="#">Terms of Use</a>. If you think this is an error, try refreshing the page or opening a support ticket.
+  </div>
+  <svg class="page-waves" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#1d3a3e" stroke-width="1.5" opacity="0.55"><path d="M-100 700 C 200 620, 500 780, 900 660 S 1300 560, 1600 640"/><path d="M-100 760 C 200 680, 500 840, 900 720 S 1300 620, 1600 700"/><path d="M-100 820 C 200 740, 500 900, 900 780 S 1300 680, 1600 760"/><path d="M-100 880 C 200 800, 500 960, 900 840 S 1300 740, 1600 820"/><path d="M-100 640 C 200 560, 500 720, 900 600 S 1300 500, 1600 580"/><path d="M-100 580 C 200 500, 500 660, 900 540 S 1300 440, 1600 520"/></g></svg>
+  <div class="app">
+    <!-- ============ Announcements ticker ============ -->
+    <div class="announcements announcements--open" id="announcements">
+      <div class="announcements__track">
+        <span class="announcements__item">Available for perp markets only</span>
+        <span class="announcements__sep">·</span>
+        <span class="announcements__item">Manual borrowing now available</span>
+        <span class="announcements__sep">·</span>
+        <span class="announcements__item">Use HYPE and BTC as collateral to borrow USDC and USDT</span>
+        <span class="announcements__sep">·</span>
+      </div>
+    </div>
+
+    <!-- ============ Top navigation ============ -->
+    <header class="topnav">
+      <a class="topnav__logo" href="index.html">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 22V12M3 7l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Hyperliquid</span>
+      </a>
+      <nav class="topnav__links">
+        <a href="index.html" class="topnav__link">Trade</a>
+        <a href="markets.html" class="topnav__link">Markets</a>
+        <a href="outcomes.html" class="topnav__link">Outcomes</a>
+        <a href="portfolio.html" class="topnav__link">Portfolio</a>
+        <a href="earn.html" class="topnav__link">Earn</a>
+        <a href="vaults.html" class="topnav__link">Vaults</a>
+        <a href="earn.html" class="topnav__link">Staking</a>
+        <a href="referrals.html" class="topnav__link">Referrals</a>
+        <a href="leaderboard.html" class="topnav__link topnav__link--active">Leaderboard</a>
+        <div class="topnav__more">
+        <button type="button" class="topnav__link topnav__link--more" id="moreToggle" aria-haspopup="true" aria-expanded="false" aria-controls="moreMenu">More<svg viewBox="0 0 24 24" width="12" height="12"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown" id="moreMenu" role="menu">
+          <a href="https://hyperliquid.gitbook.io" target="_blank" rel="noopener" role="menuitem">Documentation</a>
+          <a href="https://discord.gg/hyperliquid" target="_blank" rel="noopener" role="menuitem">Discord</a>
+          <a href="https://twitter.com/hyperliquid" target="_blank" rel="noopener" role="menuitem">Twitter</a>
+        </div>
+      </div>
+      </nav>
+      <div class="topnav__actions">
+        <button class="btn btn--primary" id="connectBtn">Connect</button>
+        <button class="iconbtn" title="Network" aria-label="Network">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <button class="iconbtn" title="Settings" aria-label="Settings">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.65 8.7a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09c0 .68.4 1.3 1.03 1.56a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08c.26.63.9 1.03 1.56 1.03H21a2 2 0 1 1 0 4h-.09c-.68 0-1.3.4-1.51 1.03z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="page">
+        <div class="page__head" style="margin-bottom:8px">
+          <h1 class="page__title">Leaderboard</h1>
+        </div>
+
+        <div class="card card--pad" style="padding-bottom:16px">
+          <!-- Toolbar: search + time window -->
+          <div class="toolbar">
+            <div class="search">
+              <span class="search__icon">⌕</span>
+              <input type="text" id="lbSearch" placeholder="Search by wallet address..." />
+            </div>
+            <div class="dd" id="lbTimeDd" style="margin-left:auto">
+              <button class="dd__trigger" id="lbTimeTrigger"><span id="lbTimeLabel">30D</span><span class="dd__caret">⌄</span></button>
+              <div class="dd__menu" id="lbTimeMenu">
+                <button class="dd__item" data-window="day"><span class="dd__check"></span>1D</button>
+                <button class="dd__item" data-window="week"><span class="dd__check"></span>7D</button>
+                <button class="dd__item dd__item--active" data-window="month"><span class="dd__check">✓</span>30D</button>
+                <button class="dd__item" data-window="allTime"><span class="dd__check"></span>All</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:20px;background:none">
+            <div class="table-scroll">
+              <table class="dt" id="lbTable">
+                <thead>
+                  <tr>
+                    <th style="width:10%">Rank</th>
+                    <th style="width:18%">Trader</th>
+                    <th class="sortable num" style="width:18%" data-key="accountValue">Account Value</th>
+                    <th class="sortable num" style="width:18%" data-key="pnl">PNL (<span class="lb-window-label">30D</span>)</th>
+                    <th class="sortable num" style="width:18%" data-key="roi">ROI (<span class="lb-window-label">30D</span>)</th>
+                    <th class="sortable num" style="width:18%" data-key="vlm">Volume (<span class="lb-window-label">30D</span>)</th>
+                  </tr>
+                </thead>
+                <tbody id="lbRows"></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="lbEmpty" style="display:none">No traders</div>
+            <div class="pagination">
+              <span>Rows per page:</span>
+              <select id="lbRpp">
+                <option>5</option><option selected>10</option><option>25</option><option>50</option>
+              </select>
+              <span id="lbPageInfo"></span>
+              <button id="lbPrev">‹</button>
+              <button id="lbNext">›</button>
+            </div>
+          </div>
+
+          <p class="method-note">
+            Excludes accounts with less than 100k USDC account value and less than 10M USDC trading volume.
+            ROI = PNL / max(100, starting account value + maximum net deposits) for the time window.
+          </p>
+        </div>
+
+        <p class="method-note">Leaderboard data: stats-data.hyperliquid.xyz/Mainnet/leaderboard (live, 47k+ accounts).</p>
+      </div>
+    </main>
+
+    <!-- Announcements popup (bottom-right card on the original) -->
+    <div class="announce-pop" id="announcePop">
+      <div class="announce-pop__head">
+        <span>Announcements</span>
+        <button class="announce-pop__close" aria-label="Close" onclick="document.getElementById('announcePop').style.display='none'">×</button>
+      </div>
+      <div class="announce-pop__item">
+        <div class="announce-pop__title">New order type: Trailing stop</div>
+        <div class="announce-pop__desc">Available for perp markets only</div>
+      </div>
+      <div class="announce-pop__item">
+        <div class="announce-pop__title">Manual borrowing now available</div>
+        <div class="announce-pop__desc">Use HYPE and BTC as collateral to borrow USDC and USDT</div>
+      </div>
+      <div class="announce-pop__item">
+        <div class="announce-pop__title">New listing: USELESS-USDC perps</div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span class="footer__status"><i class="dot dot--online"></i>Online</span>
+      <span class="footer__sep">|</span>
+      <a href="#">Docs</a><a href="#">Support</a><a href="#">Terms</a><a href="#">Privacy Policy</a>
+    </footer>
+  </div>
+
+  <script src="js/pages.js?v=7"></script>
+  <script src="js/more.js?v=1"></script>
+</body>
+</html>

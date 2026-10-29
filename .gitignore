@@ -1,0 +1,14 @@
+# 分析 / 验证过程产物（非站点源码）
+evidence/
+screenshots/
+assets/
+analysis/
+_verify/
+
+# 部署镜像副本（由本地源码同步生成）
+.deploy/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.log
