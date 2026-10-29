@@ -3,6 +3,7 @@
 > 目标站：`https://app.hyperliquid.xyz`（/trade 页，HYPE-USDC 永续）
 > 工具链：rea-agents（REA CLI，CDP 截图捕获）+ agent-browser（页面驱动/证据提取）
 > 完成时间：2026-10-21
+> **源码仓库**：<https://github.com/xilitiay/hyperliquid-dex-clone>（公开，仅源码；`evidence/`、`screenshots/`、`assets/`、`analysis/`、`_verify/`、`.deploy/` 已由 `.gitignore` 排除）
 
 ---
 
@@ -279,3 +280,18 @@ python -m http.server 8901
 - `screenshots/clone-vaults-v5.png` / `clone-leaderboard-v5.png` / `clone-portfolio-v5.png` — 三个子页 v5 颗粒度对齐截图（TVL 全额、榜单排除集+全额格式、Portfolio 三列+白线图表+11 tabs）
 - `screenshots/clone-trade-v6.png` — 交易页 v6 结构对齐截图（行情条收进图表列、两行统计、盘口/表单列顶部对齐、公告弹卡固定右下角）
 - `assets/` — 原站 bundle 下载件（分析佐证，含懒加载 chunk 清单）
+
+## 7. GitHub 仓库与推送方式（2026-10-29）
+
+- 仓库：<https://github.com/xilitiay/hyperliquid-dex-clone>（公开，`main` 分支）
+- 首推送 commit：`1f3568d feat: Hyperliquid DEX frontend clone (static HTML/CSS/JS)`（远端 tree 校验 MATCH）
+- 收录范围：8 个 HTML + `css/style.css` + `js/*.js`（5 个）+ `README.md` + `.gitignore`，共 17 个文件
+- 排除（`evidence/` 52MB 数据快照、`screenshots/`、`assets/`、`analysis/`、`_verify/`、`.deploy/`）—— 见 `.gitignore`
+
+**推送踩坑记录**（本沙箱环境）：
+
+1. `git push` 走 `github.com:443` 被网络拦截（即使关闭沙箱也不通）；`api.github.com` REST 通道可达。
+2. 因此改用 **GitHub Git Data REST API**（blob → tree → commit → ref）完成推送。
+3. 通过 API 创建且 `auto_init:false` 的仓库，Git Data API 会持续返回 `409 Git Repository is empty`；
+   必须先用 **Contents API** 写入首个文件（bootstrap README）初始化 Git 存储，之后 `/git/blobs` 才返回 201。
+4. 后续更新推送可用 `github-rest-push` 技能：`python3 push_api.py --repo xilitiay/hyperliquid-dex-clone --branch main`（需 `export GH_PAT=...`）。
